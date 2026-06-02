@@ -55,6 +55,9 @@ export default function Home() {
               type="submit"
               className="w-full rounded-md bg-blue-600 text-white py-2 font-semibold hover:bg-blue-700 transition">
               Login
+              <action>
+                <a href="/home"></a>
+              </action>
             </button>
           </form>
         </div>

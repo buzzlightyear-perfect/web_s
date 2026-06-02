@@ -8,7 +8,7 @@ export default function Navbar(){
 
       {/* Menu */}
       <div className="space-x-6">
-        <Link href="/" className="hover:text-yellow-300">Home</Link>
+        <Link href="/" className="hover:text-yellow-300">Logout</Link>
         <Link href="/about" className="hover:text-yellow-300">Tentang</Link>
         <Link href="/courses" className="hover:text-yellow-300">Kursus</Link>
         <Link href="/services" className="hover:text-yellow-300">Layanan</Link>
