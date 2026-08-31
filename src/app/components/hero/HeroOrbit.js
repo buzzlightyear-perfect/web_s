@@ -1,7 +1,6 @@
 "use client";
 import { useRef, useEffect } from "react";
-import { motion, useReducedMotion, useMotionValue, useSpring } from "motion/react";
-import { useCursor } from "../cursor/CursorContext";
+import { useReducedMotion } from "motion/react";
 
 const TECH = [
   { name: "Next.js", color: "#F8FAFC", orbit: 0 },
@@ -11,52 +10,21 @@ const TECH = [
   { name: "Unity", color: "#3B82F6", orbit: 4 },
 ];
 
-function TechBadge({ name, color, reduce }) {
-  return (
-    <motion.div
-      initial={reduce ? false : { opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: 1.2 + Math.random() * 0.4 }}
-      className="absolute px-3 py-1.5 rounded-md text-[9px] tracking-[0.15em] uppercase font-medium whitespace-nowrap"
-      style={{
-        color,
-        backgroundColor: "rgba(17,17,19,0.85)",
-        border: `1px solid ${color}30`,
-        boxShadow: `0 0 12px ${color}15, 0 0 4px ${color}10`,
-        backdropFilter: "blur(8px)",
-      }}
-      data-cursor="link"
-    >
-      {name}
-    </motion.div>
-  );
-}
-
 export default function HeroOrbit({ reduce, mouseX, mouseY }) {
-  const { isMobile } = useCursor();
   const containerRef = useRef(null);
   const rafRef = useRef(null);
   const angleRef = useRef(0);
   const orbitParticleAngle = useRef(0);
   const badgesRef = useRef([]);
   const orbitParticleRef = useRef(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const sx = useSpring(x, { damping: 20, stiffness: 100 });
-  const sy = useSpring(y, { damping: 20, stiffness: 100 });
 
   useEffect(() => {
-    if (reduce || isMobile) return;
+    if (reduce) return;
     let running = true;
     const tick = () => {
       if (!running) return;
-      const mx = mouseX.get();
-      const my = mouseY.get();
-      x.set(mx * 0.02);
-      y.set(my * 0.02);
-
       angleRef.current += 0.0008;
-      orbitParticleAngle.current += 0.004;
+      orbitParticleAngle.current += 0.005;
       const container = containerRef.current;
       if (!container) return;
       const rect = container.getBoundingClientRect();
@@ -66,76 +34,72 @@ export default function HeroOrbit({ reduce, mouseX, mouseY }) {
       TECH.forEach((tech, i) => {
         const badge = badgesRef.current[i];
         if (!badge) return;
-        const radius = 110 + tech.orbit * 25;
+        const radius = 80 + tech.orbit * 16;
         const angle = angleRef.current + (i * Math.PI * 2) / TECH.length;
         const bx = cx + Math.cos(angle) * radius;
         const by = cy + Math.sin(angle) * radius;
-        badge.style.transform = `translate(${bx - 30}px, ${by - 12}px)`;
+        badge.style.transform = `translate(${bx - 24}px, ${by - 9}px)`;
       });
 
-      // Orbit particle
       if (orbitParticleRef.current) {
-        const radius = 135;
+        const radius = 95;
         const px = cx + Math.cos(orbitParticleAngle.current) * radius;
         const py = cy + Math.sin(orbitParticleAngle.current) * radius;
-        orbitParticleRef.current.style.transform = `translate(${px - 4}px, ${py - 4}px)`;
+        orbitParticleRef.current.style.transform = `translate(${px - 3}px, ${py - 3}px)`;
       }
 
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
     return () => { running = false; if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, [reduce, isMobile, mouseX, mouseY, x, y]);
+  }, [reduce]);
 
   return (
-    <motion.div
+    <div
       ref={containerRef}
-      initial={reduce ? false : { opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      style={{ x: sx, y: sy }}
-      className="relative w-[300px] h-[300px] hidden lg:block"
+      className="relative w-full h-[200px] rounded-xl border border-white/[0.06] overflow-hidden"
+      style={{ background: "rgba(17,17,19,0.9)", boxShadow: "0 0 15px rgba(59,130,246,0.04)" }}
     >
+      {/* Title */}
+      <div className="absolute top-2.5 left-3 z-10">
+        <span className="text-[8px] tracking-[0.2em] uppercase text-white/25 font-mono">Tech Orbit</span>
+      </div>
+
       {/* Inner ring — cyan */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-[220px] h-[220px] rounded-full"
-          style={{ border: "1px solid rgba(34,211,238,0.2)", animation: "orbit 25s linear infinite" }} />
+        <div className="w-[140px] h-[140px] rounded-full"
+          style={{ border: "1px solid rgba(34,211,238,0.12)", animation: "orbit 25s linear infinite" }} />
       </div>
       {/* Outer ring — blue */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-[270px] h-[270px] rounded-full"
-          style={{ border: "1px solid rgba(59,130,246,0.15)", animation: "orbit 35s linear infinite reverse" }} />
-      </div>
-      {/* Third ring — violet */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-[300px] h-[300px] rounded-full"
-          style={{ border: "1px solid rgba(139,92,246,0.08)", animation: "orbit 45s linear infinite" }} />
+        <div className="w-[180px] h-[180px] rounded-full"
+          style={{ border: "1px solid rgba(59,130,246,0.08)", animation: "orbit 35s linear infinite reverse" }} />
       </div>
 
       {/* Orbit particle */}
       {!reduce && (
         <div ref={orbitParticleRef} className="absolute"
           style={{
-            width: 8, height: 8, borderRadius: "50%",
+            width: 6, height: 6, borderRadius: "50%",
             background: "#22D3EE",
-            boxShadow: "0 0 10px rgba(34,211,238,0.8), 0 0 20px rgba(34,211,238,0.4)",
+            boxShadow: "0 0 8px rgba(34,211,238,0.7), 0 0 16px rgba(34,211,238,0.3)",
           }} />
       )}
 
       {/* NEXT.JS Core */}
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="relative">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center"
+          <div className="w-10 h-10 rounded-full flex items-center justify-center"
             style={{
-              backgroundColor: "rgba(17,17,19,0.9)",
-              border: "1px solid rgba(59,130,246,0.3)",
-              boxShadow: "0 0 20px rgba(59,130,246,0.15), 0 0 40px rgba(59,130,246,0.08)",
+              background: "rgba(17,17,19,0.9)",
+              border: "1px solid rgba(59,130,246,0.25)",
+              boxShadow: "0 0 15px rgba(59,130,246,0.1)",
             }}>
-            <span className="text-[10px] font-bold tracking-wider text-foreground">NEXT.JS</span>
+            <span className="text-[7px] font-bold tracking-wider text-white/80">NEXT.JS</span>
           </div>
           <div className="absolute inset-0 rounded-full"
             style={{
-              border: "1px solid rgba(59,130,246,0.25)",
+              border: "1px solid rgba(59,130,246,0.2)",
               animation: "pulse-ring 3s ease-in-out infinite",
             }} />
         </div>
@@ -143,15 +107,19 @@ export default function HeroOrbit({ reduce, mouseX, mouseY }) {
 
       {/* Tech badges */}
       {TECH.map((tech, i) => (
-        <div
-          key={tech.name}
-          ref={(el) => { badgesRef.current[i] = el; }}
-          className="absolute"
-          data-cursor="link"
-        >
-          <TechBadge name={tech.name} color={tech.color} reduce={reduce} />
+        <div key={tech.name} ref={(el) => { badgesRef.current[i] = el; }} className="absolute" data-cursor="link">
+          <div className="px-2 py-1 rounded text-[7px] tracking-[0.12em] uppercase font-medium whitespace-nowrap"
+            style={{
+              color: tech.color,
+              background: "rgba(17,17,19,0.85)",
+              border: `1px solid ${tech.color}25`,
+              boxShadow: `0 0 8px ${tech.color}10`,
+              backdropFilter: "blur(6px)",
+            }}>
+            {tech.name}
+          </div>
         </div>
       ))}
-    </motion.div>
+    </div>
   );
 }

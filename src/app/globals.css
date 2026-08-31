@@ -15,12 +15,12 @@
 }
 
 :root {
-  --background: #09090b;
+  --background: #02040A;
   --foreground: #fafafa;
   --accent: #3B82F6;
   --accent-dim: rgba(59, 130, 246, 0.15);
-  --surface: #111113;
-  --surface-hi: #18181b;
+  --surface: #0A0A12;
+  --surface-hi: #111118;
   --border: rgba(255, 255, 255, 0.06);
   --muted: #71717a;
   --muted-dim: #3f3f46;
