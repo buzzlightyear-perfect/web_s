@@ -40,7 +40,11 @@ export default function Navbar() {
         scrolled ? "bg-background/70 backdrop-blur-2xl border-b border-border" : "bg-transparent"
       }`}
     >
-      <div className="container-wide flex items-center justify-between h-16 lg:h-[72px]">
+      <div className="flex items-center justify-between h-14 lg:h-[72px]"
+        style={{
+          padding: "0 max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left))",
+        }}
+      >
         <Magnetic strength={0.2}>
           <a href="#home" data-cursor="link"
             onClick={(e) => { e.preventDefault(); go("#home"); }} className="text-sm font-semibold tracking-[0.2em] uppercase">
@@ -82,7 +86,9 @@ export default function Navbar() {
             transition={{ duration: 0.25 }}
             className="lg:hidden bg-background/95 backdrop-blur-2xl border-b border-border overflow-hidden"
           >
-            <div className="container-wide py-6 flex flex-col gap-4">
+            <div className="py-5 flex flex-col gap-4"
+              style={{ padding: "20px max(20px, env(safe-area-inset-right)) 20px max(20px, env(safe-area-inset-left))" }}
+            >
               {links.map((l, i) => (
                 <motion.a
                   key={l.label}

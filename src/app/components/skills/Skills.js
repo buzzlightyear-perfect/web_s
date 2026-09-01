@@ -34,7 +34,7 @@ export default function Skills() {
   const floatDelays = useMemo(() => skills.map(() => Math.random() * 2), []);
 
   return (
-    <section id="skills" className="py-24 md:py-32 relative">
+    <section id="skills" className="py-16 md:py-24 lg:py-32 relative">
       <div className="container-wide">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.5 }} className="mb-12">
@@ -69,7 +69,7 @@ export default function Skills() {
                   transition={{ duration: 0.3, layout: { duration: 0.3 } }}
                   onMouseEnter={() => setHovered(s.name)}
                   onMouseLeave={() => setHovered(null)}
-                  className="relative px-5 py-3 rounded-lg border border-border bg-surface cursor-default transition-colors hover:border-accent/30" data-cursor="link"
+                  className="relative px-3 lg:px-5 py-2 lg:py-3 rounded-lg border border-border bg-surface cursor-default transition-colors hover:border-accent/30" data-cursor="link"
                   style={{ animation: `float-y ${floatDurs[idx]}s ease-in-out ${floatDelays[idx]}s infinite` }}
                 >
                   {/* Spotlight on hover */}

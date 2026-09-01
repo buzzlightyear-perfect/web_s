@@ -31,7 +31,7 @@ function Orbit({ reduce }) {
 export default function Contact() {
   const reduce = useReducedMotion();
   return (
-    <section id="contact" className="py-24 md:py-40 bg-surface/40 relative overflow-hidden">
+    <section id="contact" className="py-16 md:py-24 lg:py-40 bg-surface/40 relative overflow-hidden">
       <Orbit reduce={reduce} />
 
       <div className="container-wide relative z-10">
@@ -56,7 +56,7 @@ export default function Contact() {
                   whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
                   data-cursor="link"
-                  className="flex items-center justify-between py-5 border-b border-border group hover:border-accent/30 transition-colors">
+                  className="flex items-center justify-between py-4 lg:py-5 border-b border-border group hover:border-accent/30 transition-colors">
                   <div className="flex items-center gap-4">
                     <s.icon size={18} className="text-muted group-hover:text-accent transition-colors" />
                     <span className="text-lg md:text-xl font-medium tracking-tight group-hover:text-accent transition-colors">{s.label}</span>

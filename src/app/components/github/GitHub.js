@@ -20,7 +20,7 @@ function ContributionGrid({ reduce }) {
   const weeks = useMemo(() => Array.from({ length: 22 }, () => Array.from({ length: 7 }, () => Math.floor(Math.random() * 5))), []);
   const clr = (l) => ["bg-surface-hi", "bg-accent/15", "bg-accent/30", "bg-accent/50", "bg-accent/70"][l];
   return (
-    <div className="relative p-6 rounded-xl border border-border bg-surface overflow-hidden">
+    <div className="relative p-3 sm:p-4 lg:p-6 rounded-xl border border-border bg-surface overflow-hidden">
       {!reduce && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-0 bottom-0 w-40 bg-gradient-to-r from-transparent via-accent/[0.04] to-transparent"
@@ -31,7 +31,7 @@ function ContributionGrid({ reduce }) {
         {weeks.map((w, wi) => (
           <div key={wi} className="flex flex-col gap-[3px]">
             {w.map((l, di) => (
-              <div key={di} className={`w-3 h-3 rounded-[2px] ${clr(l)} ${!reduce && l > 0 ? "animate-[contribution-glow_4s_ease-in-out_infinite]" : ""}`}
+              <div key={di} className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-[2px] ${clr(l)} ${!reduce && l > 0 ? "animate-[contribution-glow_4s_ease-in-out_infinite]" : ""}`}
                 style={{ animationDelay: !reduce ? `${wi * 0.08 + di * 0.04}s` : undefined }} />
             ))}
           </div>
@@ -44,7 +44,7 @@ function ContributionGrid({ reduce }) {
 export default function GitHub() {
   const reduce = useReducedMotion();
   return (
-    <section id="github" className="py-24 md:py-32 relative">
+    <section id="github" className="py-16 md:py-24 lg:py-32 relative">
       <div className="container-narrow">
         <motion.div initial={reduce ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.5 }} className="text-center mb-12">
@@ -61,7 +61,7 @@ export default function GitHub() {
 
         <motion.div initial={reduce ? false : { opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="grid grid-cols-3 gap-4 my-10 max-w-lg mx-auto">
+          className="grid grid-cols-3 gap-3 sm:gap-4 my-8 lg:my-10 max-w-lg mx-auto">
           {stats.map((s, i) => (
             <motion.div key={s.label} initial={reduce ? false : { opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
@@ -78,7 +78,7 @@ export default function GitHub() {
             <motion.a key={r.name} href="https://github.com" target="_blank" rel="noopener noreferrer"
               initial={reduce ? false : { opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.5 + i * 0.08 }}
-              className="flex items-center justify-between p-5 rounded-xl border border-border bg-surface/50 hover:bg-surface transition-all duration-300 group" data-cursor="link">
+              className="flex items-center justify-between p-4 sm:p-5 rounded-xl border border-border bg-surface/50 hover:bg-surface transition-all duration-300 group" data-cursor="link">
               <div className="flex items-center gap-4">
                 <GithubIcon size={18} className="text-muted group-hover:text-foreground transition-colors" />
                 <div>

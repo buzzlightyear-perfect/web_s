@@ -11,7 +11,7 @@ export default function Journey() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="journey" className="py-24 md:py-32 bg-surface/40 relative overflow-hidden">
+    <section id="journey" className="py-16 md:py-24 lg:py-32 bg-surface/40 relative overflow-hidden">
       <div className="container-wide">
         <motion.div initial={reduce ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.5 }} className="mb-16">
@@ -33,7 +33,7 @@ export default function Journey() {
             </div>
           )}
 
-          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
             {timeline.map((item, i) => (
               <motion.div key={item.year}
                 initial={reduce ? false : { opacity: 0, y: 20 }}

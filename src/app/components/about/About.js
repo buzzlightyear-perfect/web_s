@@ -14,7 +14,7 @@ export default function About() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="about" className="py-24 md:py-32 relative">
+    <section id="about" className="py-16 md:py-24 lg:py-32 relative">
       {/* Ambient */}
       <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-accent/[0.03] blur-[100px] pointer-events-none" />
 
@@ -27,11 +27,11 @@ export default function About() {
           </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-16 lg:gap-24 items-start">
+        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-10 lg:gap-16 xl:gap-24 items-start">
           {/* Left - avatar area */}
           <motion.div initial={reduce ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}>
-            <div data-cursor="image" data-cursor-label="EXPLORE" className="relative w-full aspect-square max-w-[320px] rounded-2xl border border-border bg-surface overflow-hidden group">
+            <div data-cursor="image" data-cursor-label="EXPLORE" className="relative w-full aspect-square max-w-[240px] lg:max-w-[320px] rounded-2xl border border-border bg-surface overflow-hidden group mx-auto lg:mx-0">
               {/* Abstract avatar */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-24 h-24 rounded-full border-2 border-accent/30 flex items-center justify-center" style={{ animation: "pulse-ring 3s ease-in-out infinite" }}>
@@ -77,7 +77,7 @@ export default function About() {
                   transition={{ duration: 0.4, delay: 0.3 + i * 0.06 }}
                   className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-0 py-4 border-b border-border group"
                 >
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-muted w-40 shrink-0">{row.label}</span>
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-muted w-28 sm:w-40 shrink-0">{row.label}</span>
                   <span className="text-sm text-foreground font-medium">{row.value}</span>
                 </motion.div>
               ))}

@@ -16,13 +16,13 @@ function Modal({ project, onClose }) {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6" onClick={onClose}>
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6" onClick={onClose}>
       <div className="absolute inset-0 bg-background/85 backdrop-blur-xl" />
       <motion.div initial={reduce ? false : { opacity: 0, y: 30, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 30, scale: 0.97 }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto bg-surface border border-border rounded-2xl">
+        className="relative w-full max-w-3xl max-h-[90vh] lg:max-h-[85vh] overflow-y-auto bg-surface border border-border rounded-2xl">
         <div className="sticky top-0 flex items-center justify-between p-5 border-b border-border bg-surface/90 backdrop-blur-sm z-10">
           <div>
             <span className="text-[10px] tracking-[0.2em] uppercase text-accent">{project.category}</span>
@@ -30,7 +30,7 @@ function Modal({ project, onClose }) {
           </div>
           <button onClick={onClose} className="p-2 rounded-lg hover:bg-surface-hi transition-colors" aria-label="Close" data-cursor="button"><X size={18} /></button>
         </div>
-        <div className="p-6 space-y-6">
+        <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
           <div className="aspect-video rounded-xl bg-surface-hi border border-border relative overflow-hidden" data-cursor="image" data-cursor-label="VIEW">
             <div className="absolute inset-0 flex items-center justify-center text-muted text-sm">Project Preview</div>
           </div>
@@ -135,7 +135,7 @@ function ProjectCard({ project, i, reduce, onSelect }) {
       data-cursor="project"
       data-cursor-label="VIEW"
     >
-      <div className="grid md:grid-cols-[1fr_1.5fr] gap-8 items-start">
+      <div className="grid md:grid-cols-[1fr_1.5fr] gap-6 lg:gap-8 items-start">
         {/* Left meta */}
         <div ref={titleRef} style={{ transition: "transform 0.3s ease-out" }}>
           <div className="flex items-center gap-3 mb-4">
@@ -143,7 +143,7 @@ function ProjectCard({ project, i, reduce, onSelect }) {
             <div className="w-6 h-px bg-border" />
             <span className="text-[10px] tracking-[0.15em] uppercase text-accent">{project.category}</span>
           </div>
-          <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-3 group-hover:text-accent transition-colors duration-300">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-3 group-hover:text-accent transition-colors duration-300">
             {project.title}
           </h3>
           <p className="text-sm text-muted leading-relaxed mb-4">{project.description}</p>
@@ -187,7 +187,7 @@ export default function Projects() {
   const close = useCallback(() => setSelected(null), []);
 
   return (
-    <section id="projects" className="py-24 md:py-32 relative">
+    <section id="projects" className="py-16 md:py-24 lg:py-32 relative">
       <div className="container-wide">
         <motion.div initial={reduce ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           transition={{ duration: 0.5 }} className="mb-12">

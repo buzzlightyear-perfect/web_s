@@ -27,7 +27,7 @@ export default function WhatIDo() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="whatido" className="py-24 md:py-32 bg-surface/40 relative">
+    <section id="whatido" className="py-16 md:py-24 lg:py-32 bg-surface/40 relative">
       <div className="absolute inset-0 pointer-events-none opacity-[0.015]" style={{
         backgroundImage: "linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)",
         backgroundSize: "80px 80px",
@@ -42,7 +42,7 @@ export default function WhatIDo() {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-4 lg:gap-6">
           {/* Web Dev */}
           <motion.div initial={reduce ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
