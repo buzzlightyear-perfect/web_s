@@ -1,3 +1,4 @@
+"use client";
 export function GithubIcon({ size = 24, className = "" }) {
   return (
     <svg

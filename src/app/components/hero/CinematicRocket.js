@@ -130,7 +130,12 @@ export default function CinematicRocket() {
     progressRef.current = v;
   });
 
-  const deviceTier = useMemo(() => getDeviceTier(), []);
+  const [deviceTier, setDeviceTier] = useState(() => getDeviceTier());
+  useEffect(() => {
+    const handleResize = () => setDeviceTier(getDeviceTier());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const isMobile = deviceTier === "mobile" || deviceTier === "small-mobile";
   const isTablet = deviceTier === "tablet";
   const isSmallMobile = deviceTier === "small-mobile";

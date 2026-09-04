@@ -5,10 +5,10 @@ import { GithubIcon, LinkedinIcon, InstagramIcon } from "../icons";
 import Magnetic from "../cursor/Magnetic";
 
 const socials = [
-  { label: "Email", href: "mailto:your@email.com", icon: Mail, handle: "your@email.com" },
-  { label: "GitHub", href: "https://github.com/yourusername", icon: GithubIcon, handle: "@yourusername" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/yourusername", icon: LinkedinIcon, handle: "@yourusername" },
-  { label: "Instagram", href: "https://instagram.com/yourusername", icon: InstagramIcon, handle: "@yourusername" },
+  { label: "Email", href: "mailto:bhaskoro@example.com", icon: Mail, handle: "bhaskoro@example.com" },
+  { label: "GitHub", href: "https://github.com", icon: GithubIcon, handle: "@bhaskoro" },
+  { label: "LinkedIn", href: "https://linkedin.com", icon: LinkedinIcon, handle: "@bhaskoro" },
+  { label: "Instagram", href: "https://instagram.com", icon: InstagramIcon, handle: "@bhaskoro" },
 ];
 
 function Orbit({ reduce }) {

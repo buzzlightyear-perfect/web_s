@@ -5,12 +5,12 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata = {
-  title: "Your Name — Developer Portfolio",
+  title: "Bhaskoro Prayoga Utomo — Developer Portfolio",
   description: "Informatics student at UNJANI building for the web, games, and interactive applications. Next.js, React, Unity.",
   keywords: ["developer", "portfolio", "web development", "game development", "Next.js", "React", "Unity", "UNJANI"],
-  authors: [{ name: "Your Name" }],
-  openGraph: { title: "Your Name — Developer Portfolio", description: "Informatics student at UNJANI. Next.js, React, Unity.", type: "website", locale: "en_US" },
-  twitter: { card: "summary_large_image", title: "Your Name — Developer Portfolio" },
+  authors: [{ name: "Bhaskoro Prayoga Utomo" }],
+  openGraph: { title: "Bhaskoro Prayoga Utomo — Developer Portfolio", description: "Informatics student at UNJANI. Next.js, React, Unity.", type: "website", locale: "en_US" },
+  twitter: { card: "summary_large_image", title: "Bhaskoro Prayoga Utomo — Developer Portfolio" },
   robots: { index: true, follow: true },
 };
 

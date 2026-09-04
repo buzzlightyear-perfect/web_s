@@ -21,8 +21,8 @@ export const projects = [
     solution:
       "Implemented a modular architecture where each system operates independently but communicates through event-driven patterns, allowing for easy testing, maintenance, and future expansion.",
     image: "/projects/game-dev.jpg",
-    github: "#",
-    demo: "#",
+    github: null,
+    demo: null,
     year: "2024",
   },
   {
@@ -47,7 +47,7 @@ export const projects = [
     solution:
       "Implemented custom data structures optimized for each operation type: linked lists for flexible storage, stacks for operation history, and queues for batch processing, all with O(n) or better time complexity.",
     image: "/projects/inventory-system.jpg",
-    github: "#",
+    github: null,
     demo: null,
     year: "2024",
   },
@@ -73,8 +73,8 @@ export const projects = [
     solution:
       "Built with Next.js App Router for optimal rendering, Tailwind CSS for consistent styling, and Framer Motion for performant animations. Implemented component-based architecture for maintainability.",
     image: "/projects/portfolio.jpg",
-    github: "#",
-    demo: "#",
+    github: null,
+    demo: null,
     year: "2025",
   },
 ];

@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { GitBranch, Star, GitCommit } from "lucide-react";
 import { GithubIcon } from "../icons";
@@ -16,8 +16,22 @@ const stats = [
   { label: "Stars", value: "5+", icon: Star },
 ];
 
+function seededRandom(seed) {
+  let s = seed;
+  return () => {
+    s = (s * 16807 + 0) % 2147483647;
+    return (s - 1) / 2147483646;
+  };
+}
+
 function ContributionGrid({ reduce }) {
-  const weeks = useMemo(() => Array.from({ length: 22 }, () => Array.from({ length: 7 }, () => Math.floor(Math.random() * 5))), []);
+  const [weeks, setWeeks] = useState(() =>
+    Array.from({ length: 22 }, () => Array.from({ length: 7 }, () => 0))
+  );
+  useEffect(() => {
+    const rng = seededRandom(42);
+    setWeeks(Array.from({ length: 22 }, () => Array.from({ length: 7 }, () => Math.floor(rng() * 5))));
+  }, []);
   const clr = (l) => ["bg-surface-hi", "bg-accent/15", "bg-accent/30", "bg-accent/50", "bg-accent/70"][l];
   return (
     <div className="relative p-3 sm:p-4 lg:p-6 rounded-xl border border-border bg-surface overflow-hidden">

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useCallback } from "react";
-import { motion, useMotionValue, useSpring, useReducedMotion, animate } from "motion/react";
+import { useMotionValue, useSpring, useReducedMotion } from "motion/react";
 import { useCursor } from "./CursorContext";
 
 const TRAIL_MAX = 8;
