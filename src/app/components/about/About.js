@@ -2,7 +2,7 @@
 import { motion, useReducedMotion } from "motion/react";
 
 const bio = [
-  { label: "NAME", value: "Bhaskoro Prayoga Utomo" },
+  { label: "NAME", value: "Bhaskoro Prayoga" },
   { label: "EDUCATION", value: "Informatics" },
   { label: "UNIVERSITY", value: "Universitas Jenderal Achmad Yani" },
   { label: "STATUS", value: "Currently Studying" },
@@ -62,7 +62,7 @@ export default function About() {
                 I&apos;m an Informatics student at Universitas Jenderal Achmad Yani (UNJANI) with a passion for turning ideas into functional, elegant software. My journey is driven by curiosity and the desire to solve real-world problems through code.
               </p>
               <p>
-                From building game systems to developing web applications, I explore different domains of software development to expand my understanding of what&apos;s possible with technology.
+                From building game systems to developing web applications, I explore different domains of software development to expand my understanding of what&apos;s possible with technology. I&apos;m focused on game development, web development, and creating interactive digital experiences.
               </p>
             </div>
 

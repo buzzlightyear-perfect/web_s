@@ -38,9 +38,9 @@ export default function Contact() {
         <div className="max-w-3xl">
           <motion.div initial={reduce ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             transition={{ duration: 0.5 }}>
-            <span className="text-[10px] tracking-[0.25em] uppercase text-accent mb-3 block">Contact</span>
+            <span className="text-[10px] tracking-[0.25em] uppercase text-accent mb-3 block">GET IN TOUCH</span>
             <h2 className="text-[clamp(2rem,5vw,4rem)] font-bold tracking-[-0.03em] leading-[1.05] mb-6" data-cursor="text">
-              Let&apos;s build<br />something<br />interesting<span className="text-accent">.</span>
+              Let&apos;s build<br />something<br />together<span className="text-accent">.</span>
             </h2>
             <p className="text-muted text-base leading-relaxed max-w-lg mb-12" data-cursor="text">
               Currently studying Informatics at Universitas Jenderal Achmad Yani and building with Next.js, programming, and game development.

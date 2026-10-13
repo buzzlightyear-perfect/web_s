@@ -9,7 +9,8 @@ const links = [
   { label: "ABOUT", href: "#about" },
   { label: "SKILLS", href: "#skills" },
   { label: "PROJECTS", href: "#projects" },
-  { label: "JOURNEY", href: "#journey" },
+  { label: "EXPERIENCE", href: "#experience" },
+  { label: "LEARNING", href: "#learning" },
   { label: "CONTACT", href: "#contact" },
 ];
 
@@ -48,7 +49,7 @@ export default function Navbar() {
         <Magnetic strength={0.2}>
           <a href="#home" data-cursor="link"
             onClick={(e) => { e.preventDefault(); go("#home"); }} className="text-sm font-semibold tracking-[0.2em] uppercase">
-            Portfolio<span className="text-accent">.</span>
+            BHASKORO<span className="text-accent">.</span>
           </a>
         </Magnetic>
 

@@ -81,6 +81,15 @@ export default function Hero() {
                 </motion.div>
 
                 {/* Main headline — responsive typography */}
+                <motion.div
+                  initial={reduce ? false : { opacity: 0, y: 16, filter: "blur(6px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="mb-2 lg:mb-3"
+                  data-cursor="text"
+                >
+                  <span className="text-white/50 text-sm lg:text-base font-medium tracking-wide">Hi, I&apos;m</span>
+                </motion.div>
                 <motion.h1
                   initial={reduce ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -89,7 +98,6 @@ export default function Hero() {
                   style={{ fontSize: "clamp(2.5rem, 12vw, 5.2rem)" }}
                   data-cursor="text"
                 >
-                  <span className="text-white">BUILDING</span><br />
                   <span className="inline-block" style={{
                     background: "linear-gradient(135deg, #3B82F6, #22D3EE)",
                     WebkitBackgroundClip: "text",
@@ -97,9 +105,10 @@ export default function Hero() {
                     backgroundClip: "text",
                     animation: "hero-text-breathe 6s ease-in-out infinite",
                   }}>
-                    DIGITAL
-                  </span><br />
-                  <span className="text-white">EXPERIENCES</span>
+                    BHASKORO
+                  </span>
+                  <br />
+                  <span className="text-white">PRAYOGA</span>
                   <span style={{ color: "#22D3EE", textShadow: "0 0 20px rgba(34,211,238,0.5)" }}>.</span>
                   <span className="inline-block w-2.5 lg:w-3 h-5 lg:h-6 ml-1 align-middle" style={{
                     backgroundColor: "#22D3EE",
@@ -117,15 +126,13 @@ export default function Hero() {
                   data-cursor="text"
                 >
                   <p className="text-white/60 text-sm lg:text-base mb-2">
-                    <span className="text-white/80">Informatics Student</span> &{" "}
-                    <span style={{ color: "#3B82F6" }}>Developer</span>
+                    <span style={{ color: "#3B82F6" }}>Game Programmer</span> &{" "}
+                    <span className="text-white/80">Developer</span>
                   </p>
                   <p className="text-white/40 text-[13px] lg:text-sm leading-relaxed" style={{ lineHeight: "1.65" }}>
-                    Currently studying Informatics at
-                    Universitas Jenderal Achmad Yani (UNJANI).
+                    I build interactive experiences through code, games and the web.
                     <br />
-                    Focused on building interactive web applications,
-                    programming, and game development.
+                    Informatics student at Universitas Jenderal Achmad Yani (UNJANI).
                   </p>
                 </motion.div>
 
@@ -150,7 +157,7 @@ export default function Hero() {
                         background: "linear-gradient(90deg, transparent, rgba(34,211,238,0.2), transparent)",
                         animation: "cta-travel 3s linear infinite",
                       }} />
-                      <span className="relative z-10">Explore My Work</span>
+                      <span className="relative z-10">View Projects</span>
                       <ArrowRight size={13} className="relative z-10 group-hover:translate-x-1 transition-transform" />
                     </a>
                   </Magnetic>

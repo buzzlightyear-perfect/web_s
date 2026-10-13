@@ -31,8 +31,8 @@ export default function Footer() {
       <div className="container-wide">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <div className="text-sm font-semibold tracking-tight">Bhaskoro Prayoga Utomo</div>
-            <div className="text-[9px] tracking-[0.2em] uppercase text-muted mt-1">Informatics Student & Developer</div>
+            <div className="text-sm font-semibold tracking-tight">BHASKORO PRAYOGA</div>
+            <div className="text-[9px] tracking-[0.2em] uppercase text-muted mt-1">Game Programmer &bull; Developer</div>
           </div>
 
           <div className="flex items-center gap-3">
@@ -46,7 +46,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-6 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[10px] text-muted">&copy; {new Date().getFullYear()} Bhaskoro Prayoga Utomo</p>
+          <p className="text-[10px] text-muted">&copy; 2026 Bhaskoro Prayoga. Built with Next.js.</p>
           <motion.button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} data-cursor="button"
             initial={false} animate={{ opacity: show ? 1 : 0, y: show ? 0 : 8 }}
             className="flex items-center gap-1.5 text-[10px] text-muted hover:text-foreground transition-colors" aria-label="Back to top">
