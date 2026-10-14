@@ -66,3 +66,5 @@ export const currentlyLearning = [
     description: "Inventory, interaction, UI, and gameplay systems architecture and implementation.",
   },
 ];
+
+export const lastSync = "2026-10-14T15:44:59Z";
