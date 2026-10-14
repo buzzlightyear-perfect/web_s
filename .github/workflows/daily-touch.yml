@@ -2,9 +2,9 @@ name: Daily Touch (Senin-Kamis, 1x sehari)
 
 on:
   schedule:
-    # 09:00 WIB (02:00 UTC), Senin-Kamis saja.
-    # 1-4 = Sen Sel Rab Kam. Jumat(5)/Sabtu(6)/Minggu(0) libur.
-    - cron: "0 2 * * 1-4"
+    # 04:00 WIB = 21:00 UTC hari sebelumnya (WIB = UTC+7).
+    # 0-3 UTC (Min Sen Sel Rab) = 1-4 WIB (Sen Sel Rab Kam).
+    - cron: "0 21 * * 0-3"
   workflow_dispatch: # tombol Run workflow manual untuk test
 
 permissions:
