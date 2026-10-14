@@ -1,12 +1,10 @@
-name: Daily Touch (acak 3-4 hari)
+name: Daily Touch (Senin-Kamis, 1x sehari)
 
 on:
   schedule:
-    # 09:00 WIB + 17:00 WIB (02:00 & 10:00 UTC), tiap hari.
-    # Commit TIDAK tiap jalan — ada undian 30% di dalam job agar
-    # hasilnya selang 3-4 hari, 1-2 push saja.
-    - cron: "0 2 * * *"
-    - cron: "0 10 * * *"
+    # 09:00 WIB (02:00 UTC), Senin-Kamis saja.
+    # 1-4 = Sen Sel Rab Kam. Jumat(5)/Sabtu(6)/Minggu(0) libur.
+    - cron: "0 2 * * 1-4"
   workflow_dispatch: # tombol Run workflow manual untuk test
 
 permissions:
@@ -22,32 +20,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Undian acak (~30% lanjut, sisanya skip)
-        id: dice
-        run: |
-          ROLL=$((RANDOM % 100))
-          echo "roll=$ROLL"
-          if [ "$ROLL" -lt 30 ]; then
-            echo "lanjut=true" >> "$GITHUB_OUTPUT"
-            # 80% -> 1 commit, 20% -> 2 commit
-            ROLL2=$((RANDOM % 100))
-            if [ "$ROLL2" -lt 20 ]; then
-              echo "jumlah=2" >> "$GITHUB_OUTPUT"
-            else
-              echo "jumlah=1" >> "$GITHUB_OUTPUT"
-            fi
-          else
-            echo "lanjut=false" >> "$GITHUB_OUTPUT"
-            echo "jumlah=0" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Skip (tidak hoki hari ini)
-        if: steps.dice.outputs.lanjut != 'true'
-        run: echo "Skip hari ini agar pola tidak konsisten (roll=${{ steps.dice.outputs.roll }})."
-
-      - name: Sentuh 1 baris + push (maks 2 commit)
-        if: steps.dice.outputs.lanjut == 'true'
+      - name: Sentuh 1 baris + push (1 commit)
         run: |
           set -e
           git config user.name "buzzlightyear-perfect"
@@ -63,34 +39,22 @@ jobs:
             "chore: daily data sync [skip ci]"
           )
 
-          JUMLAH="${{ steps.dice.outputs.jumlah }}"
-          echo "Akan membuat $JUMLAH commit."
+          NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          # Hapus baris lastSync lama (jika ada), lalu append 1 baris baru.
+          # Aman: hanya export const tambahan, tidak mengubah data existing.
+          grep -v "export const lastSync" "$TARGET" > "$TARGET.tmp" || true
+          mv "$TARGET.tmp" "$TARGET"
+          echo "" >> "$TARGET"
+          echo "export const lastSync = \"$NOW\";" >> "$TARGET"
 
-          for i in $(seq 1 "$JUMLAH"); do
-            NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-            # Hapus baris lastSync lama (jika ada), lalu append 1 baris baru.
-            # Aman: hanya export const tambahan, tidak mengubah data existing.
-            grep -v "export const lastSync" "$TARGET" > "$TARGET.tmp" || true
-            mv "$TARGET.tmp" "$TARGET"
-            echo "" >> "$TARGET"
-            echo "export const lastSync = \"$NOW\";" >> "$TARGET"
-
-            MSG=${MSGS[$((RANDOM % ${#MSGS[@]}))]}
-            git add "$TARGET"
-            # Skip jika tidak ada perubahan (misal dijalankan 2x dalam 1 menit)
-            if git diff --cached --quiet; then
-              echo "Tidak ada perubahan, skip commit ke-$i."
-              continue
-            fi
-            git commit -m "$MSG"
-
-            # Jeda acak 60-300 detik sebelum commit ke-2 agar timestamp beda
-            if [ "$i" -lt "$JUMLAH" ]; then
-              SLEEP_S=$((60 + RANDOM % 240))
-              echo "Jeda $SLEEP_S detik sebelum commit ke-2..."
-              sleep "$SLEEP_S"
-            fi
-          done
+          MSG=${MSGS[$((RANDOM % ${#MSGS[@]}))]}
+          git add "$TARGET"
+          # Skip jika tidak ada perubahan (misal dijalankan 2x dalam 1 menit)
+          if git diff --cached --quiet; then
+            echo "Tidak ada perubahan, skip push."
+            exit 0
+          fi
+          git commit -m "$MSG"
 
           git pull --rebase origin main || true
           git push origin HEAD:main
