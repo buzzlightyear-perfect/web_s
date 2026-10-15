@@ -2,10 +2,15 @@ name: Daily Touch (Senin-Kamis, 1x sehari)
 
 on:
   schedule:
-    # 04:00 WIB = 21:00 UTC hari sebelumnya (WIB = UTC+7).
+    # Target 04:00 WIB = 21:00 UTC hari sebelumnya (WIB = UTC+7).
+    # Dijalankan 30 menit lebih awal (20:30 UTC = 03:30 WIB) sebagai buffer
+    # karena GitHub schedule sering delay 10 menit - 2 jam saat load tinggi.
     # 0-3 UTC (Min Sen Sel Rab) = 1-4 WIB (Sen Sel Rab Kam).
-    - cron: "0 21 * * 0-3"
+    - cron: "30 20 * * 0-3"
   workflow_dispatch: # tombol Run workflow manual untuk test
+
+env:
+  TZ: Asia/Jakarta
 
 permissions:
   contents: write
@@ -17,11 +22,20 @@ concurrency:
 jobs:
   touch:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Log waktu mulai
+        run: |
+          echo "Jadwal target: 04:00 WIB (cron 20:30 UTC + buffer delay GitHub)"
+          echo "Waktu lokal (WIB):"
+          date
+          echo "Waktu UTC:"
+          date -u
 
       - name: Sentuh 1 baris + push (1 commit)
         run: |
@@ -56,5 +70,26 @@ jobs:
           fi
           git commit -m "$MSG"
 
-          git pull --rebase origin main || true
-          git push origin HEAD:main
+          # Sinkron dengan remote dulu agar push tidak ditolak (non-fast-forward).
+          # --autostash agar aman jika ada perubahan lokal tak terduga.
+          # Tanpa '|| true' supaya kegagalan rebase terlihat sebagai gagal di log.
+          git pull --rebase --autostash origin main
+
+          # Retry push 3x untuk tahan terhadap race / gangguan jaringan sesaat.
+          for i in 1 2 3; do
+            if git push origin HEAD:main; then
+              echo "Push berhasil pada percobaan ke-$i."
+              break
+            fi
+            echo "Push percobaan ke-$i gagal, coba lagi dalam 10 detik..."
+            sleep 10
+            git pull --rebase --autostash origin main
+            if [ "$i" -eq 3 ]; then
+              echo "Push gagal 3x, keluar dengan error."
+              exit 1
+            fi
+          done
+
+          echo "Selesai pada:"
+          date
+          date -u
