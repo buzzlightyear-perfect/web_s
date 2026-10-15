@@ -7,6 +7,9 @@ on:
     # karena GitHub schedule sering delay 10 menit - 2 jam saat load tinggi.
     # 0-3 UTC (Min Sen Sel Rab) = 1-4 WIB (Sen Sel Rab Kam).
     - cron: "30 20 * * 0-3"
+    # TEST SEMENTARA: Kamis 15 Okt 2026 jam 15:00 WIB = 08:00 UTC.
+    # Hapus baris ini setelah test berhasil.
+    - cron: "0 8 15 10 *"
   workflow_dispatch: # tombol Run workflow manual untuk test
 
 env:
