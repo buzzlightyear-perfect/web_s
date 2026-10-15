@@ -2,14 +2,16 @@ name: Daily Touch (Senin-Kamis, 1x sehari)
 
 on:
   schedule:
-    # Target 04:00 WIB = 21:00 UTC hari sebelumnya (WIB = UTC+7).
-    # Dijalankan 30 menit lebih awal (20:30 UTC = 03:30 WIB) sebagai buffer
-    # karena GitHub schedule sering delay 10 menit - 2 jam saat load tinggi.
-    # 0-3 UTC (Min Sen Sel Rab) = 1-4 WIB (Sen Sel Rab Kam).
-    - cron: "30 20 * * 0-3"
-    # TEST SEMENTARA: Kamis 15 Okt 2026 jam 15:00 WIB = 08:00 UTC.
+    # UTAMA: 23:00 UTC = 06:00 WIB (Senin-Kamis).
+    # CADANGAN: 23:30 UTC = 06:30 WIB, otomatis skip jika utama sudah sukses.
+    # 2 slot ini sengaja untuk tahan terhadap delay/skip GitHub
+    # (delay 10 mnt - 3 jam itu normal, cron selalu UTC, env TZ tidak pengaruh).
+    # 0-3 UTC (Min Sen Sel Rab malam) = 06:00/06:30 WIB (Sen Sel Rab Kam pagi).
+    - cron: "0 23 * * 0-3"
+    - cron: "30 23 * * 0-3"
+    # TEST SEMENTARA: Jumat 16 Okt 2026 jam 06:00 WIB = 23:00 UTC Kamis 15 Okt.
     # Hapus baris ini setelah test berhasil.
-    - cron: "0 8 15 10 *"
+    - cron: "0 23 15 10 *"
   workflow_dispatch: # tombol Run workflow manual untuk test
 
 env:
@@ -34,7 +36,7 @@ jobs:
 
       - name: Log waktu mulai
         run: |
-          echo "Jadwal target: 04:00 WIB (cron 20:30 UTC + buffer delay GitHub)"
+          echo "Jadwal target: 06:00 WIB utama + 06:30 WIB cadangan (cron UTC, toleransi delay GitHub)"
           echo "Waktu lokal (WIB):"
           date
           echo "Waktu UTC:"
