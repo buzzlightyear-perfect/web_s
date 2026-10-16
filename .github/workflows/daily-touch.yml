@@ -9,9 +9,6 @@ on:
     # 0-3 UTC (Min Sen Sel Rab malam) = 06:00/06:30 WIB (Sen Sel Rab Kam pagi).
     - cron: "0 23 * * 0-3"
     - cron: "30 23 * * 0-3"
-    # TEST SEMENTARA: Jumat 16 Okt 2026 jam 06:00 WIB = 23:00 UTC Kamis 15 Okt.
-    # Hapus baris ini setelah test berhasil.
-    - cron: "0 23 15 10 *"
   workflow_dispatch: # tombol Run workflow manual untuk test
 
 env:
