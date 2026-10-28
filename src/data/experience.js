@@ -82,4 +82,5 @@ export const currentlyLearning = [
 
 
 
-export const lastSync = "2026-10-28T02:04:55Z";
+
+export const lastSync = "2026-10-28T02:29:26Z";
